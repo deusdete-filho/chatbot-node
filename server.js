@@ -88,16 +88,36 @@ if ( intentName == "indicar-filme"  )
   
   } // fim do else
   
-  
-    else if ( intentName == "bom-filme"  ) 
+// ---- - - - - - - -- -- - - - - - - - - - - -- - - - - - - - - --- - - - - - - - - - - - - --   
+
+  else if ( intentName == "bom-filme"  ) 
   {console.log('Entrou no intent -> bom - filme ')  
   
+   var query = 'select MAX(avaliacao) from filme"';
+    
+    connection.query(query, function (error, results, fields) {
+  
+       if (error) throw error;
+       connection.end();
+       var contato =  '';
+       contato = 'Segundo os usuários do Google, o filme'+results[0].titulo+' tem uma aprovação de '+results[0].avaliacao+'%';
+       response.json({"fulfillmentText" : contato })
+    })  
+   
+   
    response.json({
      "fulfillmentMessages" : [
               {
+                "card": {
+                  "title": "Processo Seletivo",
+                  "subtitle": "Bem vindo ao nosso processo seletivo",
+                  "imageUri": "https://firebasestorage.googleapis.com/v0/b/universidade-3d7f8.appspot.com/o/processo%2Fprocesso-seletivo.png?alt=media&token=d5a89cec-1c07-4dad-9b44-7aaf098128bd"
+                }
+              },
+              {
                 "text" :{
                    "text": [
-                      "To procurando os lancamentos"
+                      "Quer que eu indique outro ?"
                   ]
                 }
               }
@@ -106,7 +126,41 @@ if ( intentName == "indicar-filme"  )
   
   } // fim do else
   
+      else if ( intentName == "bom-filme - yes"  ) 
+  {console.log('Entrou no intent -> bom - filme ')  
   
+   var query = 'select * from filme where id = "'+nome_genero+'"';
+    
+    connection.query(query, function (error, results, fields) {
+  
+       if (error) throw error;
+       connection.end();
+       var contato =  '';
+       contato = 'ID =>'+results[0].id+'- Titulo =>'+results[0].titulo+'-Ano =>'+results[0].ano;
+       response.json({"fulfillmentText" : contato })
+    })  
+   
+   
+   response.json({
+     "fulfillmentMessages" : [
+              {
+                "card": {
+                  "title": "Processo Seletivo",
+                  "subtitle": "Bem vindo ao nosso processo seletivo",
+                  "imageUri": "https://firebasestorage.googleapis.com/v0/b/universidade-3d7f8.appspot.com/o/processo%2Fprocesso-seletivo.png?alt=media&token=d5a89cec-1c07-4dad-9b44-7aaf098128bd"
+                }
+              },
+              {
+                "text" :{
+                   "text": [
+                      "Quer que eu indique outro ?"
+                  ]
+                }
+              }
+            ]
+     });
+  
+  } // fim do else
   
 });
 
