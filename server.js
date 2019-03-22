@@ -24,6 +24,9 @@ app.post('/botfilme', function(request, response) {
       database : process.env.MYSQL_DB  
       });
   connection.connect(); 
+  connection.query(query,function (error, results, fields) {
+            if (error) throw error;
+              connection.end();});
   
   var intentName = request.body.queryResult.intent.displayName;
   
