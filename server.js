@@ -29,17 +29,16 @@ app.post('/botfilme', function(request, response) {
   
   if ( intentName == "indicar-filme"  ) 
   {
-    
-    
+        
   var id = request.body.queryResult.parameteres['id'];
 
   var query = 'select * from filme where id = "'+id+'"';
     
-  connection.query(query,function (error, results, fields) {
-  if (error) throw error;
-    connection.end();});
+            connection.query(query,function (error, results, fields) {
+            if (error) throw error;
+              connection.end();});
+    
              response.json({"fulfillmentText" :"Voce foi cadastrado(a) para o nosso processo seletivo - Verifique a data das provas" })
-
   }
   else   if ( intentName == "indicar-filme - yes"  ) 
   {
