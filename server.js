@@ -17,36 +17,13 @@ var mysql = require("mysql");
 
 app.post('/botfilme', function(request, response) {
   
-      var connection = mysql.createConnection({
-      host     : process.env.MYSQL_HOST,
-      user     : process.env.MYSQL_USER,
-      password : process.env.MYSQL_PASS,
-      database : process.env.MYSQL_DB  
-      });
-  connection.connect(); 
-  connection.query(query,function (error, results, fields) {
-            if (error) throw error;
-              connection.end();});
+          var id = request.body.queryResult.parameteres['id'];
   
-  var intentName = request.body.queryResult.intent.displayName;
-  
-  if ( intentName == "indicar-filme"  ) 
-  {
-        
-  var id = request.body.queryResult.parameteres['id'];
+          var nomeid ='id';
 
-  var query = 'select * from filme where id = "'+id+'"';
-    
-            connection.query(query,function (error, results, fields) {
-            if (error) throw error;
-              connection.end();});
-    
-             response.json({"fulfillmentText" :"Voce foi cadastrado(a) para o nosso processo seletivo - Verifique a data das provas" })
-  }
-  else   if ( intentName == "indicar-filme - yes"  ) 
-  {
-  }
-  
+           response.json({"fulfillmentText": nomeid})
+
+
 
 });
 
