@@ -40,6 +40,11 @@ app.post('/botfilme', function(request, response) {
   
   });
   }
+  else   if ( intentName == "indicar-filme - yes"  ) 
+  {
+    var nome_genero = request.body.queryResult.parameteres['nome-genero'];
+  }
+  
   
 });
 
