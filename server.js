@@ -38,11 +38,8 @@ app.post('/botfilme', function(request, response) {
   if (error) throw error;
     connection.end();});
 
-    
   response.json({
-  "fulfillmentText": "nada" +results[0].id
-  
-});
+  "fulfillmentText": "nada"+results[0].id});
   }
   else   if ( intentName == "indicar-filme - yes"  ) 
   {
