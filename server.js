@@ -6,7 +6,6 @@ app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
-var mysql = require("mysql");
 app.use(express.static('public'));
 
 // http://expressjs.com/en/starter/basic-routing.html
@@ -15,11 +14,15 @@ app.get('/', function(request, response) {
 });
 
 
-app.post('/chatbootarea1', function(request, response) {
+app.post('/botfilme', function(request, response) {
   
-  response.json({"fulfillmentText": "Primeiro Web"})
+  var intentName = request.body.queryResult.intent.displayName;
   
+  if ( intentName == "indicar-filme"  ) {
   
+  response.json({"fulfillmentText": "Primeiro Web"});
+  
+});
 
 // listen for requests :)
 const listener = app.listen(process.env.PORT, function() {
