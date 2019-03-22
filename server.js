@@ -33,7 +33,7 @@ if ( intentName == "indicar-filme"  )
  console.log('Entrou no intent -> indicar-filme')  
   
     var nome_genero = request.body.queryResult.parameters['nome-genero'];
-    var query = 'select * from filme where LIKE "'+nome_genero+'"';
+    var query = 'select * from filme where id = "'+nome_genero+'"';
     
     connection.query(query, function (error, results, fields) {
   
@@ -46,6 +46,27 @@ if ( intentName == "indicar-filme"  )
 
     
   }
+  
+  if ( intentName == "indicar-filme"  ) 
+  {
+ console.log('Entrou no intent -> indicar-filme')  
+  
+    var nome_genero = request.body.queryResult.parameters['nome-genero'];
+    var query = 'select * from filme where id = "'+nome_genero+'"';
+    
+    connection.query(query, function (error, results, fields) {
+  
+       if (error) throw error;
+       connection.end();
+       var contato =  '';
+       contato = 'ID =>'+results[0].id+'- Titulo =>'+results[0].titulo+'-Ano =>'+results[0].ano;
+       response.json({"fulfillmentText" : contato })
+    })     
+
+    
+  }
+  
+  
 
 });
 
