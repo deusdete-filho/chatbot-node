@@ -35,34 +35,25 @@ app.post('/botfilme', function(request, response) {
     
   var nome_genero = request.body.queryResult.parameteres['nome-genero'];
 
-  var query = '';
+  var query = 'select * from filme where id = "'+nome_genero+'"';
+    
   connection.query(query,function (error, results, fields) {
   if (error) throw error;
     connection.end();});
     
-  var id_filme = results[0].id;
+  var id_filme = '';
   var titulo_filme = '';
   var imagem_filme = '';
   var genero_filme = '';
   var url_filme = '';
 
+    id_filme = '+results[0].id+';
+    
   
     
   response.json({
   "fulfillmentMessages": [
-    {
-      "card": {
-        "title": "card title",
-        "subtitle": "card text",
-        "imageUri": "https://assistant.google.com/static/images/molecule/Molecule-Formation-stop.png",
-        "buttons": [
-          {
-            "text": "Veja o trailer",
-            "postback": "https://assistant.google.com/"
-          }
-        ]
-      }
-    }
+
   ]
   
 });
