@@ -17,29 +17,22 @@ var mysql = require("mysql");
 
 app.post('/botfilme', function(request, response) {
   
-     
-  
-  var intentName = request.body.queryResult.intent.displayName;
-  
-  if ( intentName == "indicar-filme"  ) 
-  {
-     var connection = mysql.createConnection({
+      var connection = mysql.createConnection({
       host     : process.env.MYSQL_HOST,
       user     : process.env.MYSQL_USER,
       password : process.env.MYSQL_PASS,
       database : process.env.MYSQL_DB  
       });
   connection.connect(); 
-  var id = request.body.queryResult.parameteres['id'];
-
-  var query = 'select * from filme where id = "'+id+'"';
+  
+  var intentName = request.body.queryResult.intent.displayName;
+  
+  if ( intentName == "indicar-filme"  ) 
+  {
     
-  connection.query(query,function (error, results, fields) {
-  if (error) throw error;
-    connection.end();});
 
-  response.json({
-  "fulfillmentText": "nada"+results[0].id});
+
+  response.json({"fulfillmentText": 'ookokokok'});
   }
   else   if ( intentName == "indicar-filme - yes"  ) 
   {
