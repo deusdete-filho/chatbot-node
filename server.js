@@ -16,17 +16,34 @@ app.get('/', function(request, response) {
 var mysql = require("mysql");
 
 app.post('/botfilme', function(request, response) {
-
-  var intentName = request.body.queryResult.intent.displayName;
   
-    if ( intentName == "indicar-filme"  ) 
+
+  var connection = mysql.createConnection({
+      host     : process.env.MYSQL_HOST,
+      user     : process.env.MYSQL_USER,
+      password : process.env.MYSQL_PASS,
+      database : process.env.MYSQL_DB  
+  });
+  connection.connect();
+  
+  var intentName = request.body.queryResult.intent.displayName;  
+    
+if ( intentName == "indicar-filme"  ) 
   {
+ console.log('Entrou no intent -> indicar-filme')  
   
-  
-          var nomeid ='id';
+    var nome_genero = request.body.queryResult.parameters['nome-genero'];
+    var query = 'select * from filme where genero = "'+nome_genero+'"';
+    
+    connection.query(query, function (error, results, fields) {
+       if (error) throw error;
+       connection.end();
+       var contato =  '';
+       contato = 'ID =>'+results[0].id+'- Titulo =>'+results[0].titulo+'-Ano =>'+results[0].ano;
+       response.json({"fulfillmentText" : contato })
+    })     
 
-           response.json({"fulfillmentText": nomeid})
-
+    
   }
 
 });
