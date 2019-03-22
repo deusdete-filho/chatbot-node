@@ -25,9 +25,6 @@ app.post('/botfilme', function(request, response) {
       });
   connection.connect(); 
   
-
-  
-  
   var intentName = request.body.queryResult.intent.displayName;
   
   if ( intentName == "indicar-filme"  ) 
@@ -45,16 +42,11 @@ app.post('/botfilme', function(request, response) {
   var titulo_filme = '';
   var imagem_filme = '';
   var genero_filme = '';
-  var url_filme = '';
-
-    id_filme = '+results[0].id+';
-    
+  var url_filme = '';    
   
     
   response.json({
-  "fulfillmentMessages": [
-
-  ]
+  "fulfillmentText": "nada"
   
 });
   }
