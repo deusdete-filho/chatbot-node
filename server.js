@@ -16,14 +16,18 @@ app.get('/', function(request, response) {
 var mysql = require("mysql");
 
 app.post('/botfilme', function(request, response) {
+
+  var intentName = request.body.queryResult.intent.displayName;
   
-          var id = request.body.queryResult.parameteres['id'];
+    if ( intentName == "indicar-filme"  ) 
+  {
+  
   
           var nomeid ='id';
 
            response.json({"fulfillmentText": nomeid})
 
-
+  }
 
 });
 
