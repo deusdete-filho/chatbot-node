@@ -17,36 +17,30 @@ var mysql = require("mysql");
 
 app.post('/botfilme', function(request, response) {
   
-      var connection = mysql.createConnection({
+     
+  
+  var intentName = request.body.queryResult.intent.displayName;
+  
+  if ( intentName == "indicar-filme"  ) 
+  {
+     var connection = mysql.createConnection({
       host     : process.env.MYSQL_HOST,
       user     : process.env.MYSQL_USER,
       password : process.env.MYSQL_PASS,
       database : process.env.MYSQL_DB  
       });
   connection.connect(); 
-  
-  var intentName = request.body.queryResult.intent.displayName;
-  
-  if ( intentName == "indicar-filme"  ) 
-  {
-    
-  var nome_genero = request.body.queryResult.parameteres['nome-genero'];
+  var id = request.body.queryResult.parameteres['id'];
 
-  var query = 'select * from filme where id = "'+nome_genero+'"';
+  var query = 'select * from filme where id = "'+id+'"';
     
   connection.query(query,function (error, results, fields) {
   if (error) throw error;
     connection.end();});
-    
-  var id_filme = '';
-  var titulo_filme = '';
-  var imagem_filme = '';
-  var genero_filme = '';
-  var url_filme = '';    
-  
+
     
   response.json({
-  "fulfillmentText": "nada"
+  "fulfillmentText": "nada" +results[0].id
   
 });
   }
