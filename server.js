@@ -25,17 +25,29 @@ app.post('/botfilme', function(request, response) {
       });
   connection.connect(); 
   
-    var query = '';
-  
-    connection.query(query,function (error, results, fields) {
-     if (error) throw error;
-     connection.end();
+
   
   
   var intentName = request.body.queryResult.intent.displayName;
   
   if ( intentName == "indicar-filme"  ) 
   {
+    
+  var nome_genero = request.body.queryResult.parameteres['nome-genero'];
+
+  var query = '';
+  connection.query(query,function (error, results, fields) {
+  if (error) throw error;
+    connection.end();});
+    
+  var id_filme = results[0].id;
+  var titulo_filme = '';
+  var imagem_filme = '';
+  var genero_filme = '';
+  var url_filme = '';
+
+  
+    
   response.json({
   "fulfillmentMessages": [
     {
@@ -53,12 +65,10 @@ app.post('/botfilme', function(request, response) {
     }
   ]
   
-  
-  });
+});
   }
   else   if ( intentName == "indicar-filme - yes"  ) 
   {
-    var nome_genero = request.body.queryResult.parameteres['nome-genero'];
   }
   
 
