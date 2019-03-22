@@ -30,9 +30,19 @@ app.post('/botfilme', function(request, response) {
   if ( intentName == "indicar-filme"  ) 
   {
     
+    
+  var id = request.body.queryResult.parameteres['id'];
 
+  var query = 'select * from filme where id = "'+id+'"';
+    
+  connection.query(query,function (error, results, fields) {
+  if (error) throw error;
+    connection.end();});
+  var id ='';
+  id = 'ID=>'+results[0].id+'-;
 
-  response.json({"fulfillmentText": 'ookokokok'});
+  response.json({"fulfillmentText": id})
+    
   }
   else   if ( intentName == "indicar-filme - yes"  ) 
   {
