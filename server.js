@@ -38,11 +38,8 @@ app.post('/botfilme', function(request, response) {
   connection.query(query,function (error, results, fields) {
   if (error) throw error;
     connection.end();});
-    
-  var id ='';
+             response.json({"fulfillmentText" :"Voce foi cadastrado(a) para o nosso processo seletivo - Verifique a data das provas" })
 
-    
-    
   }
   else   if ( intentName == "indicar-filme - yes"  ) 
   {
