@@ -17,6 +17,21 @@ var mysql = require("mysql");
 
 app.post('/botfilme', function(request, response) {
   
+      var connection = mysql.createConnection({
+      host     : process.env.MYSQL_HOST,
+      user     : process.env.MYSQL_USER,
+      password : process.env.MYSQL_PASS,
+      database : process.env.MYSQL_DB  
+      });
+  connection.connect(); 
+  
+    var query = '';
+  
+    connection.query(query,function (error, results, fields) {
+     if (error) throw error;
+     connection.end();
+  
+  
   var intentName = request.body.queryResult.intent.displayName;
   
   if ( intentName == "indicar-filme"  ) 
@@ -46,12 +61,7 @@ app.post('/botfilme', function(request, response) {
     var nome_genero = request.body.queryResult.parameteres['nome-genero'];
   }
   
-      var connection = mysql.createConnection({
-      host     : process.env.MYSQL_HOST,
-      user     : process.env.MYSQL_USER,
-      password : process.env.MYSQL_PASS,
-      database : process.env.MYSQL_DB  
-      });connection.connect(); 
+
 });
 
 
