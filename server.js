@@ -20,7 +20,25 @@ app.post('/botfilme', function(request, response) {
   
   if ( intentName == "indicar-filme"  ) 
   {
-  response.json({"fulfillmentText": "Primeiro Web"});
+  response.json({
+  "fulfillmentMessages": [
+    {
+      "card": {
+        "title": "card title",
+        "subtitle": "card text",
+        "imageUri": "https://assistant.google.com/static/images/molecule/Molecule-Formation-stop.png",
+        "buttons": [
+          {
+            "text": "Veja o trailer",
+            "postback": "https://assistant.google.com/"
+          }
+        ]
+      }
+    }
+  ]
+  
+  
+  });
   }
   
 });
