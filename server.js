@@ -47,28 +47,69 @@ if ( intentName == "indicar-filme"  )
     
   }
   
-  if ( intentName == "indicar-filme"  ) 
-  {
- console.log('Entrou no intent -> indicar-filme')  
+  else if ( intentName == "lancamentos"  ) 
+  {console.log('Entrou no intent -> lancamentos')  
   
-    var nome_genero = request.body.queryResult.parameters['nome-genero'];
-    var query = 'select * from filme where id = "'+nome_genero+'"';
+   response.json({
+     "fulfillmentMessages" : [
+              {
+                "card": {
+                  "title": "Processo Seletivo",
+                  "subtitle": "Bem vindo ao nosso processo seletivo",
+                  "imageUri": "https://firebasestorage.googleapis.com/v0/b/universidade-3d7f8.appspot.com/o/processo%2Fprocesso-seletivo.png?alt=media&token=d5a89cec-1c07-4dad-9b44-7aaf098128bd"
+                }
+              },
+              {
+                "text" :{
+                   "text": [
+                      "Voce quer participar do processo seletivo ?"
+                  ]
+                }
+              }
+            ]
+     });
+  
+  } // fim do else
     
-    connection.query(query, function (error, results, fields) {
+  else if ( intentName == "lancamentos - yes"  ) 
+  {console.log('Entrou no intent -> lancamentos sim ')  
   
-       if (error) throw error;
-       connection.end();
-       var contato =  '';
-       contato = 'ID =>'+results[0].id+'- Titulo =>'+results[0].titulo+'-Ano =>'+results[0].ano;
-       response.json({"fulfillmentText" : contato })
-    })     
-
-    
-  }
+   response.json({
+     "fulfillmentMessages" : [
+              {
+                "text" :{
+                   "text": [
+                      "To procurando os lancamentos"
+                  ]
+                }
+              }
+            ]
+     });
+  
+  } // fim do else
   
   
-
+    else if ( intentName == "bom-filme"  ) 
+  {console.log('Entrou no intent -> bom - filme ')  
+  
+   response.json({
+     "fulfillmentMessages" : [
+              {
+                "text" :{
+                   "text": [
+                      "To procurando os lancamentos"
+                  ]
+                }
+              }
+            ]
+     });
+  
+  } // fim do else
+  
+  
+  
 });
+
 
 
 // listen for requests :)
