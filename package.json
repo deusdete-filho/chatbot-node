@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "express": "^4.16.4",
-    "body-parser": "*"
+    "body-parser": "*",
+    "mysql": "*"
   },
   "engines": {
     "node": "8.x"

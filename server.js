@@ -13,6 +13,7 @@ app.get('/', function(request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
+var mysql = require("mysql");
 
 app.post('/botfilme', function(request, response) {
   
