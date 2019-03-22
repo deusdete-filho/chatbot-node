@@ -33,7 +33,7 @@ if ( intentName == "indicar-filme"  )
  console.log('Entrou no intent -> indicar-filme')  
   
     var nome_genero = request.body.queryResult.parameters['nome-genero'];
-    var query = 'select * from filme where genero = '+nome_genero+'"';
+    var query = 'select * from filme where LIKE "'+nome_genero+'"';
     
     connection.query(query, function (error, results, fields) {
   
