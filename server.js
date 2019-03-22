@@ -38,10 +38,10 @@ app.post('/botfilme', function(request, response) {
   connection.query(query,function (error, results, fields) {
   if (error) throw error;
     connection.end();});
+    
   var id ='';
-  id = 'ID=>'+results[0].id+'-;
 
-  response.json({"fulfillmentText": id})
+    
     
   }
   else   if ( intentName == "indicar-filme - yes"  ) 
