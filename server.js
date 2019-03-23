@@ -27,6 +27,9 @@ app.post('/botfilme', function(request, response) {
   connection.connect();
   
   var intentName = request.body.queryResult.intent.displayName;  
+  
+  
+// ---- - - - - - - -- -- - - - - - - - - - - -- - - - - - - - - --- - - - - - - - - - - - - --   
     
 if ( intentName == "indicar-filme"  ) 
   {
@@ -46,7 +49,8 @@ if ( intentName == "indicar-filme"  )
 
     
   }
-  
+// ---- - - - - - - -- -- - - - - - - - - - - -- - - - - - - - - --- - - - - - - - - - - - - --   
+ 
   else if ( intentName == "lancamentos"  ) 
   {console.log('Entrou no intent -> lancamentos')  
   
@@ -70,7 +74,8 @@ if ( intentName == "indicar-filme"  )
      });
   
   } // fim do else
-    
+ // ---- - - - - - - -- -- - - - - - - - - - - -- - - - - - - - - --- - - - - - - - - - - - - --   
+   
   else if ( intentName == "lancamentos - yes"  ) 
   {console.log('Entrou no intent -> lancamentos sim ')  
   
@@ -106,7 +111,8 @@ else if ( intentName == "bom-filme"  )
     })  
      
   } // fim do else
-  
+ // ---- - - - - - - -- -- - - - - - - - - - - -- - - - - - - - - --- - - - - - - - - - - - - --   
+ 
 else if ( intentName == "bom-filme - yes"  ) 
   {console.log('Entrou no intent -> bom - filme ')  
   
