@@ -7,12 +7,14 @@
   "description": "A simple Node app built on Express, instantly up and running.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js  --inline --hot"
+    "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.16.4",
     "body-parser": "*",
-    "mysql": "*"
+    "express": "^4.16.4",
+    "mysql": "^2.16.0",
+    "mysql2": "^1.6.5",
+    "sequelize": "^5.2.12"
   },
   "engines": {
     "node": "8.x"
