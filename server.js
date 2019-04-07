@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+require('dotenv').config()
 
 var bodyParser = require('body-parser')
 
@@ -257,11 +258,10 @@ else if ( intentName == "trailer"  )
 // ---- - - - - - - -- -- - - - - - - - - - - -- - - - - - - - - --- - - - - - - - - - - - - --
 
 
-
 })
 
 
 // listen for requests :)
 const listener = app.listen(process.env.PORT, function() {
-  console.log('Your app is listening on port ' + listener.address().port);
+  console.log('Servidor rodouuuuuu. Ele esta na porta ' + listener.address().port);
 });
