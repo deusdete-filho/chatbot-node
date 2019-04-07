@@ -1,6 +1,6 @@
 const db = require('./db')
 
-const Post = db.sequelize.define('usuario',{
+const Post = db.sequelize.define('usuarios',{
  nome: {
    type: db.Sequelize.STRING
  },
@@ -10,3 +10,6 @@ const Post = db.sequelize.define('usuario',{
 })
 
 module.exports = Post
+
+// criar tabela
+// Post.sync({force: true})
