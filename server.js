@@ -53,8 +53,8 @@ else if ( intentName == "usuario-login"  )
       where: {
         email: request.body.queryResult.parameters['email']
       }
-    }).then(function(user){
-     response.json({"fulfillmentText"user.nome})
+    }).then(function(nome){
+     response.json({"fulfillmentText" :"Você foi encontrado com sucesso" +nome})
     }).catch(function(erro){
      response.json({"fulfillmentText" :"Houve um erro "})
     })
