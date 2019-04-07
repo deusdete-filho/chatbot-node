@@ -4,17 +4,19 @@ require('dotenv').config()
 
 var bodyParser = require('body-parser')
 var mysql = require("mysql");
+const Cadastro = require('./models/Cadastro')
 
 app.use( bodyParser.json() );
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(express.static('public'));
-const Cadastro = require('./models/Cadastro')
+
 
 app.all('/', function(request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
+
 
 app.post('/botfilme', function(request, response) {
 
@@ -46,17 +48,17 @@ if(intentName == "usuario-cadastro")
 
 else if ( intentName == "usuario-login"  )
   {
-    console.log('Entrou no intent -> usuario-login')
-    const email = request.body.queryResult.parameters['email'];
 
-    var id='0';
-    var query = 'select * from usuario where email = "'+email+'"';
-    connection.query(query, function (error, results, fields) {
-       if (error) throw error;
-        var id_usuario = results.insertId;
-       connection.end();
-       response.json({"fulfillmentText" :"Olá "+results[0].nome+", me diz qual gênero de filme você gosta:"})
-    });
+    Cadastro.findAll({
+      where: {
+        email: request.body.queryResult.parameters['email']
+      }
+    }).then(function(){
+     response.json({"fulfillmentText" :"Você foi encontrado com sucesso"})
+    }).catch(function(erro){
+     response.json({"fulfillmentText" :"Houve um erro "})
+    })
+
   }
 
 
@@ -255,7 +257,6 @@ else if ( intentName == "trailer"  )
 
 
 })
-
 
 // listen for requests :)
 const listener = app.listen(process.env.PORT, function() {
