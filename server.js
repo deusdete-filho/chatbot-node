@@ -3,13 +3,13 @@ const app = express();
 
 var bodyParser = require('body-parser')
 
-app.use( bodyParser.json() );       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+app.use( bodyParser.json() );
+app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(express.static('public'));
+const Post = require('./models/Post')
 
-// http://expressjs.com/en/starter/basic-routing.html
 app.all('/', function(request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
@@ -17,7 +17,6 @@ app.all('/', function(request, response) {
 var mysql = require("mysql");
 
 app.post('/botfilme', function(request, response) {
-
 
   var connection = mysql.createConnection({
       host     : process.env.MYSQL_HOST,
@@ -29,18 +28,6 @@ app.post('/botfilme', function(request, response) {
 
   var intentName = request.body.queryResult.intent.displayName;
 
-  const db = require('sql')
-
- const Cadastro = db.sequelize.define('usuarios',{
-  nome: {
-    type: db.Sequelize.STRING
-  },
-  email: {
-    type: db.Sequelize.STRING
-  }
-})
-
-
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -48,7 +35,7 @@ app.post('/botfilme', function(request, response) {
 if ( intentName == "usuario-cadastro"  )
   {  console.log('Entrou no intent -> cadastra-usuario')
 
-   Cadastro.create({
+   Post.create({
      nome: request.body.queryResult.parameters['nome'],
      email: request.body.queryResult.parameters['email']
    }).then(function(){
