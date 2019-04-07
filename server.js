@@ -3,19 +3,18 @@ const app = express();
 require('dotenv').config()
 
 var bodyParser = require('body-parser')
+var mysql = require("mysql");
 
 app.use( bodyParser.json() );
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(express.static('public'));
-const Post = require('./models/Post')
+const Cadastro = require('./models/Cadastro')
 
 app.all('/', function(request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
-
-var mysql = require("mysql");
 
 app.post('/botfilme', function(request, response) {
 
@@ -27,16 +26,13 @@ app.post('/botfilme', function(request, response) {
   });
   connection.connect();
 
-  var intentName = request.body.queryResult.intent.displayName;
-
+  const intentName = request.body.queryResult.intent.displayName;
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-
-if ( intentName == "usuario-cadastro"  )
-  {  console.log('Entrou no intent -> cadastra-usuario')
-
-   Post.create({
+if(intentName == "usuario-cadastro")
+{
+   Cadastro.create({
      nome: request.body.queryResult.parameters['nome'],
      email: request.body.queryResult.parameters['email']
    }).then(function(){
@@ -44,7 +40,7 @@ if ( intentName == "usuario-cadastro"  )
    }).catch(function(erro){
     response.json({"fulfillmentText" :"Houve um erro no cadastro "})
    })
-  }
+ }
 
 
 
