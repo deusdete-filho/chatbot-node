@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
-const sequelize = new Sequelize(process.env.MYSQL_DB,process.env.MYSQL_USER,process.env.MYSQL_PASS, {
-  host: process.env.MYSQL_HOST,
+const sequelize = new Sequelize('TTByOs9dqB','TTByOs9dqB','tbZxoW5a55', {
+  host: "remotemysql.com",
   dialect: "mysql"
 })
 sequelize.authenticate().then(function(){
