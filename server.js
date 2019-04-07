@@ -53,11 +53,27 @@ else if ( intentName == "usuario-login"  )
       where: {
         email: request.body.queryResult.parameters['email']
       }
-    }).then(function(){
-     response.json({"fulfillmentText" :"Você foi encontrado com sucesso"})
+    }).then(function(user){
+     response.json({"fulfillmentText"user.nome})
     }).catch(function(erro){
      response.json({"fulfillmentText" :"Houve um erro "})
     })
+
+
+
+
+
+        const email = request.body.queryResult.parameters['email'];
+
+        var id='0';
+        var query = 'select * from usuario where email = "'+email+'"';
+        connection.query(query, function (error, results, fields) {
+           if (error) throw error;
+            var id_usuario = results.insertId;
+           connection.end();
+           response.json({"fulfillmentText" :"Olá "+results[0].nome+", me diz qual gênero de filme você gosta:"})
+        });
+
 
   }
 
